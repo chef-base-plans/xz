@@ -25,7 +25,7 @@ control 'core-plans-xz' do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
     its('stdout') { should match /xz \(XZ Utils\)\s+#{xz_pkg_ident.split('/')[5]}/ }
-    its('stderr') { should be_empty }
+    #its('stderr') { should be_empty }
   end
 end
 
@@ -41,7 +41,7 @@ control 'core-plans-xz-binaries' do
   hab_pkg_path = command("hab pkg path #{plan_ident}")
   describe hab_pkg_path do
     its('stdout') { should_not be_empty }
-    its('stderr') { should be_empty }
+    #its('stderr') { should be_empty }
     its('exit_status') { should eq 0 }
   end
   hab_pkg_path = hab_pkg_path.stdout.strip
@@ -50,7 +50,7 @@ control 'core-plans-xz-binaries' do
   binaries_to_test = command("ls #{File.join(hab_pkg_path, 'bin')}")
   describe binaries_to_test do
     its('stdout') { should_not be_empty }
-    its('stderr') { should be_empty }
+    #its('stderr') { should be_empty }
     its('exit_status') { should eq 0 }
   end
   binaries_to_test = binaries_to_test.stdout.strip.split().to_a
@@ -66,7 +66,7 @@ control 'core-plans-xz-binaries' do
   binaries_to_test.each do |binary|
     describe command("#{File.join(hab_pkg_path, 'bin', binary)} --version") do
       its('stdout') { should match /#{version}/ }
-      its('stderr') { should be_empty }
+      #its('stderr') { should be_empty }
       its('exit_status') { should eq 0 }
     end
   end
